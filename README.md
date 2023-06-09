@@ -53,10 +53,9 @@ Building and deploying a microservices architecture where multiple components co
 ## Instructions 
 
 - Create a Docker network manually that will host the RabbitMQ image. Start a RabbitMQ container on the network created. Access this network through its gateway IP address to connect to RabbitMQ from producer/consumers. Totally, 2 networks should exist, one holding the RabbitMQ container and the other holding all the remaining microservices.
-Hint: The docker-compose file which spins up the producer and consumers ensures that they lie on the network automatically. 
 
 - For the producer service:
-  - It is a RabbitMQ client that can construct queues/exchanges and transfer the necessary data to consumers. The exchange to deliver the messages to one of the 4      different queues(one for each consumer) based on the binding/routing key.
+  - It is a RabbitMQ client that can construct queues/exchanges and transfer the necessary data to consumers. The exchange to deliver the messages to one of the 4 different queues(one for each consumer) based on the binding/routing key.
 
    - An HTTP Server (Flask for Python/Express for NodeJS) to listen to health_check requests so that it can distribute it to the respective consumer.	
       - This server will be listening to requests which are GET type and the health_check message should be sent as an argument for the request
@@ -82,7 +81,7 @@ Hint: The docker-compose file which spins up the producer and consumers ensures 
 - For the consumer_two (insert_record):
   - RabbitMQ Client to listen for incoming requests on the “insert_record” queue and process it.
 
-  - This consumer must insert the record into the database (DB is students choice. Could use SQL,MongoDB,etc). The data to be inserted will be listened to through the “insert_record” queue.
+  - This consumer must insert the record into the database. The data to be inserted will be listened to through the “insert_record” queue.
 
 - For the consumer_three (delete_record):
   - RabbitMQ Client to listen for incoming requests on the “delete_record” queue and process it.
